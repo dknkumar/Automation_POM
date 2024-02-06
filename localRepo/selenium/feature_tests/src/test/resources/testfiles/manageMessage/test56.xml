@@ -1,0 +1,145 @@
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+              <soap-env:Header>
+                             <n0:CallerInformation xmlns:n0="http://www.sap.com/webas/712/soap/features/runtime/metering/">
+                                           <m:Type xmlns:m="http://www.sap.com/webas/712/soap/features/runtime/metering/">SA</m:Type>
+                                           <m:Company xmlns:m="http://www.sap.com/webas/712/soap/features/runtime/metering/">0020270862</m:Company>
+                                           <m:Sys xmlns:m="http://www.sap.com/webas/712/soap/features/runtime/metering/">Y21_100</m:Sys>
+                             </n0:CallerInformation>
+              </soap-env:Header>
+              <soap-env:Body>
+                             <n1:envelope xmlns:n1="http://www.sap.com/sap_ich4ls/" xmlns:prx="urn:sap.com:proxy:Y21:/1SAI/TAS8FB8FF2B37F00B51AA2D:740">
+                                           <message date="2021-07-12" time="06:12:27">
+                                                         <id>42010AEECDE11EEBB8DB042310E579FC</id>
+                                           </message>
+                                           <sender scheme="SGLN" agency="GS1">urn:epc:id:sgln:4063973.00292.0</sender>
+                                           <recipients>
+                                                          <id scheme="RegReport" agency="SAP">RR_BRH_ICH_SHIP</id>
+                                           </recipients>
+                                           <content type="GenericReporting" format="ATTP" version="1.0" encoding="XML">
+                                                          <ATTPGRDocument>
+	<GRHeader>
+		<GRHeaderBase>
+			<ReceiverId>RR_BRH_ICH_SHIP_PLD</ReceiverId>
+			<InstanceId>42010AEECDE11EEBAFD7552B78472631</InstanceId>
+			<DateTime>2021-05-27T07:10:48Z</DateTime>
+			<VariantName>RR_BRH_SHIP_PLD</VariantName>
+			<VariantVersion>1 </VariantVersion>
+		</GRHeaderBase>
+		<ContentList>
+			<Content type="BusinessPartner">
+				<ContentItem id="90-ICH GR: Brazil 3PL 1" selectionMethod="DestLocGLN">
+					<ContentItemSection type="Registration">
+						<ContentItemSectionItem>
+							<attribute id="sttpBupRegRegno">52434771000190</attribute>
+							<attribute id="sttpBupRegRegtype">ZBR_CNPJ</attribute>
+						</ContentItemSectionItem>
+					</ContentItemSection>
+				</ContentItem>
+				<ContentItem id="51-ICH GR: Brazil MAH" selectionMethod="SrcOPGLN">
+					<ContentItemSection type="Registration">
+						<ContentItemSectionItem>
+							<attribute id="sttpBupRegRegno">51533666000146</attribute>
+							<attribute id="sttpBupRegRegtype">BR_CNPJ</attribute>
+						</ContentItemSectionItem>
+					</ContentItemSection>
+				</ContentItem>
+			</Content>
+			<Content type="Event">
+				<ContentItem id="1-OBSERVE">
+					<ContentItemSection type="Details">
+						<ContentItemSectionItem>
+							<attribute id="sttpEvtEvttime">20210527071047.0000000 </attribute>
+							<attribute id="sttpEvtEvttzoneoffset">+02:00</attribute>
+						</ContentItemSectionItem>
+					</ContentItemSection>
+					<ContentItemSection type="BusinessTransaction">
+						<ContentItemSectionItem>
+							<attribute id="sttpTrnBizttype">urn:epcglobal:cbv:btt:sap_nfe</attribute>
+							<attribute id="sttpTrnTrncode">urn:epcglobal:cbv:bt:4063973002927:90723641642768274750907236416427682747501234</attribute>
+						</ContentItemSectionItem>
+					</ContentItemSection>
+					<ContentItemSection type="Attributes">
+						<ContentItemSectionItem>
+							<attribute id="sttpEvtPrpRrBrCar"> 78738198000100</attribute>
+							<attribute id="sttpEvtPrpRrBrUnfit" />
+						</ContentItemSectionItem>
+					</ContentItemSection>
+				</ContentItem>
+			</Content>
+		</ContentList>
+	</GRHeader>
+	<GRBody>
+		<ObjContentList>
+			<ObjContent type="LotRefList">
+				<ObjContentGroup>
+					<ObjCode id="010406397300093010LTBR0159" type="LGTIN"
+						dateManuf="2021-05-27" dateExp="2022-05-27" />
+					<ObjCode id="010406397300094710LTBR0159" type="LGTIN"
+						dateManuf="2021-05-27" dateExp="2022-05-27" />
+				</ObjContentGroup>
+			</ObjContent>
+			<ObjContent type="ObjHierarchy">
+				<ObjContentGroup type="TopObject"
+					id="00140639730000004478">
+					<ObjCode id="00140639730000004478" type="SSCC"
+						packLevel="0" />
+					<ObjCode id="0104063973000947211736829548958" type="SGTIN"
+						lotRef="LTBR0159" parentId="00140639730000004478" packLevel="1" />
+					<ObjCode id="0104063973000947211045430052110" type="SGTIN"
+						lotRef="LTBR0159" parentId="00140639730000004478" packLevel="1" />
+					<ObjCode id="0104063973000947211780889736142" type="SGTIN"
+						lotRef="LTBR0159" parentId="00140639730000004478" packLevel="1" />
+					<ObjCode id="0104063973000930211757072579063" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211736829548958"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211652863847387" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211736829548958"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211311920287316" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211736829548958"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211230232633469" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211736829548958"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211767268701097" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211736829548958"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211936220527935" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211045430052110"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211003239873129" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211045430052110"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211424663706632" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211045430052110"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211931578686236" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211045430052110"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211483452186350" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211045430052110"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211143693475654" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211780889736142"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211363348653498" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211780889736142"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211375399777866" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211780889736142"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211929920662632" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211780889736142"
+						packLevel="2" />
+					<ObjCode id="0104063973000930211831456642143" type="SGTIN"
+						lotRef="LTBR0159" parentId="0104063973000947211780889736142"
+						packLevel="2" />
+				</ObjContentGroup>
+			</ObjContent>
+		</ObjContentList>
+	</GRBody>
+</ATTPGRDocument>
+                                           </content>
+                             </n1:envelope>
+              </soap-env:Body>
+</soap-env:Envelope>

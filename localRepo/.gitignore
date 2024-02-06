@@ -1,0 +1,28 @@
+# exclude maven output
+**/target/
+# exclude typical eclipse output
+**/bin/
+# exclude eclipse settings
+**/.settings/
+**/.project
+**/.classpath
+**/node_modules/
+# exclude sub-gitignores
+*/.gitignore
+# exclude shade generated pom
+**/dependency-reduced-pom.xml
+**/temp/
+**/pom.xml.versionsBackup
+**/*.log
+**/.idea/
+**/*.iml
+**/~$*.docx
+**/package-lock.json
+**/Gruntfile.js
+/ui5/*/webapp/index.html
+/ui5/*/webapp/test/index.html
+/reporting/*/index.html
+/java/service_layer/src/main/webapp/index.html
+/java/service_layer/src/main/webapp/jsp/index.jsp
+**/.mta/
+**.mtar

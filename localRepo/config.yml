@@ -1,0 +1,12 @@
+defaultTemplate: all
+templates:
+   - Template: all
+     variants:
+        #existing variants...
+        #.
+        #.
+        #.
+      - Variant: fortify
+
+branches:
+   - Branch: QA_Deployment

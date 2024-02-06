@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epcis:EPCISDocument xmlns:epcis="urn:epcglobal:epcis:xsd:1" xmlns:sap="http://sap.com/xi/STTP/SAPExt" xmlns:sbdh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader" creationDate="2018-12-09T13:45:16Z" schemaVersion="1.2">
+	<EPCISHeader>
+		<sbdh:StandardBusinessDocumentHeader>
+			<sbdh:HeaderVersion>1.0</sbdh:HeaderVersion>
+			<sbdh:Sender>
+				<sbdh:Identifier Authority="GLN">0369090100002</sbdh:Identifier>
+			</sbdh:Sender>
+			<sbdh:Receiver>
+				<sbdh:Identifier Authority="GLN">1100001002641</sbdh:Identifier>
+			</sbdh:Receiver>
+			<sbdh:DocumentIdentification>
+				<sbdh:Standard>EPCglobal</sbdh:Standard>
+				<sbdh:TypeVersion>1.0</sbdh:TypeVersion>
+				<sbdh:InstanceIdentifier>115056CA6ACA1ED5B0E9C0665D42005RegTestVNJQA21</sbdh:InstanceIdentifier>
+				<sbdh:Type>Events</sbdh:Type>
+				<sbdh:CreationDateAndTime>2019-01-25T10:25:53Z</sbdh:CreationDateAndTime>
+			</sbdh:DocumentIdentification>
+		</sbdh:StandardBusinessDocumentHeader>
+	</EPCISHeader>
+	<EPCISBody>
+		<EventList>
+			<ObjectEvent>
+				<eventTime>2020-02-26T12:39:06.515506Z</eventTime>
+				<eventTimeZoneOffset>+01:00</eventTimeZoneOffset>
+				<epcList>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533410</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533411</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533412</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533413</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533414</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533415</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533416</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533417</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533418</epc>
+				<epc>urn:epc:id:sgtin:0369090.018099.7578533419</epc>
+				</epcList>
+				<action>DELETE</action>
+				<bizStep>urn:epcglobal:cbv:bizstep:decommissioning</bizStep>
+				<disposition>urn:epcglobal:cbv:disp:inactive</disposition>
+				<readPoint>
+					<id>urn:epc:id:sgln:0369090.10000.0</id>
+				</readPoint>
+				<bizLocation>
+					<id>urn:epc:id:sgln:0369090.10000.0</id>
+				</bizLocation>
+				<SAPExtension>
+					<objAttributes>
+						<LOTNO>Testvinay2005QA2021</LOTNO>
+						<DATEX>20211220</DATEX>
+					</objAttributes>
+				</SAPExtension>
+			</ObjectEvent>
+		</EventList>
+	</EPCISBody>
+</epcis:EPCISDocument>

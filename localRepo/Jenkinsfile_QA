@@ -1,0 +1,175 @@
+#!/usr/bin/env groovy
+@Library(['piper-lib', 'piper-lib-os']) _
+//import com.sap.piper.ConfigurationLoader
+import com.sap.icd.jenkins.Utils
+   
+node {
+    checkout scm 
+    deploymentHelper = load "${WORKSPACE}/piper.scripts/deploymentHelper.groovy"
+    
+    utils = new Utils()
+    gitCommitId= utils.getGitCommitId()
+
+}
+
+
+try {
+        node{
+            stage('Setup and Validation') {
+                lock(resource: "${env.JOB_NAME}/10", inversePrecedence: true) {
+					milestone 10				
+					deleteDir()
+					checkout scm
+					
+					setupPipelineEnvironment script: this, storeGithubStatistics: true
+				}
+            }
+
+            stage('Build Java') {
+                lock(resource: "${env.JOB_NAME}/20", inversePrecedence: true) {
+					milestone 20				
+					deleteDir()
+					checkout scm
+
+					echo "[INFO] Start building."
+					sh "mvn clean install -pl java/service_layer -Dcom.sap.cloud.crypto.clientcert.mapping_mode=CN -Dcom.sap.cloud.crypto.clientcert.keystore_name=system"
+					stash('Java')
+					sh "mvn -V -B clean javadoc:aggregate cobertura:cobertura -Pjenkins -Dadditionalparam=-Xdoclint:none -pl java/service_layer"
+					echo "[INFO] Build finished." 
+
+					currentBuild.result = 'SUCCESS'
+				}
+            } 
+          
+            stage('Build UI5') {
+                lock(resource: "${env.JOB_NAME}/30", inversePrecedence: true) {
+					milestone 30				
+					deleteDir()
+					checkout scm
+
+					echo "[INFO] Start building."
+					setVersion script: this, buildTool: 'mta' 
+									
+					sh "java -jar /var/jenkins_home/userContent/mta.jar --build-target=NEO --mtar=com.sap.ich4ls.portal.ui5.mtar build"
+					stash('UI5')               
+					echo "[INFO] Build finished." 
+				   
+					currentBuild.result = 'SUCCESS'
+				}
+            } 
+
+            stage('Deploy Java') {
+                lock(resource: "${env.JOB_NAME}/40", inversePrecedence: true) {
+					milestone 40				
+					deleteDir()
+					checkout scm
+					
+					unstash('Java')
+					
+					sh "ls java/service_layer/target/"
+					sh "mv java/service_layer/target/com*.war java/service_layer/target/ROOT.war"
+
+					neoDeploy script: this, neo: [account: 'a629a2553', application: 'cmoapplayerrefactor', host: 'eu1.hana.ondemand.com', runtime: 'neo-java-web', runtimeVersion: '3', size: 'lite'], deployMode: 'warParams',  source: 'java/service_layer/target/ROOT.war',  warAction: 'rolling-update',  dockerImage: 'docker.wdf.sap.corp:50000/gslpdev/jenkins/neo_sdk_java_web_tomcat8:2.0-alpine'
+
+					echo "[INFO] SCP deploy finished."
+				  
+					currentBuild.result = 'SUCCESS'
+				}
+            }
+           
+            stage('Deploy UI5') { 
+                lock(resource: "${env.JOB_NAME}/50", inversePrecedence: true) {
+					milestone 50			
+					deleteDir()
+					checkout scm
+					
+					unstash('UI5')
+					echo "[INFO] mtar deploying."                                       
+					deployHTML5mtar(this, "qa", "eu1")
+					echo "[INFO] mtar finished."
+					
+					currentBuild.result = 'SUCCESS'
+				}
+            }     
+
+    }
+} catch (Throwable err) { // catch all exceptions
+    globalPipelineEnvironment.addError(this, err)
+    currentBuild.result = 'FAILURE'
+    throw err
+} finally {
+    node{
+        influxWriteData script: this
+        mailSendNotification script: this
+        slackSendNotification(script: this, channel: "#ich4ls")
+    }
+}
+
+def deployHTML5mtar(script, environment, landscape) {
+
+    //def configuration = ConfigurationLoader.defaultStepConfiguration(script, "neoDeploy")
+
+    def deployFiles = findFiles(glob: '**/com.sap.ich4ls.portal.ui5.mtar')
+    def deployFile = deployFiles[0].path
+    def deployImportMode = "providerImport"
+    
+    def deployAccount
+    def deployHost
+    def deployNeoCredentialsId
+    
+    def dockerImage = globalPipelineEnvironment.getConfigProperty('dockerImage')
+    def dockerEnvVars = globalPipelineEnvironment.getConfigProperty('dockerEnvVars')
+    def dockerOptions = globalPipelineEnvironment.getConfigProperty('dockerOptions')
+        
+    if (environment == 'dev') {
+        deployAccount = 'w6cd17e00'
+    }
+    
+    if (landscape == 'canary') {
+        deployHost = 'int.sap.hana.ondemand.com'
+        deployNeoCredentialsId = 'CI_CREDENTIALS_ID'
+    }
+    
+    if (environment == 'qa') {
+        deployAccount = 'a629a2553'
+    }
+    
+    if (landscape == 'eu1') {
+        deployHost = 'eu1.hana.ondemand.com'
+        deployNeoCredentialsId = 'CI_CREDENTIALS_ID'
+    }
+    
+    echo "Deploying solution from file: ${deployFile} to account: ${deployAccount} on host: ${deployHost} with credentialsId: ${deployNeoCredentialsId}"
+
+    def neoExecutable = "$JENKINS_HOME/userContent/neo-1.35.8/tools/neo.sh"
+    
+    def neoDeployScript =
+                """#!/bin/bash
+                    "${neoExecutable}" deploy-mta \
+                    --host '${deployHost}' \
+                    --account '${deployAccount}' \
+                    --mode '${deployImportMode}'"""
+                    
+    withCredentials([usernamePassword(
+            credentialsId: deployNeoCredentialsId,
+            passwordVariable: 'password',
+            usernameVariable: 'username')]) {
+
+            def commonDeployParams =
+                """--user "${username}" \
+                   --password "${password}" \
+                   --source "${deployFile}" \
+                   --synchronous"""
+                   
+            
+            /*
+            dockerExecute(dockerImage: 'docker.wdf.sap.corp:50000/piper/maven'),
+                          dockerEnvVars: configuration.get('dockerEnvVars'),
+                          dockerOptions: configuration.get('dockerOptions')) {
+            */
+            sh """${neoDeployScript} \
+                      ${commonDeployParams}
+                   """
+            
+    }
+}

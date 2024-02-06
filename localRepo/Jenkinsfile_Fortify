@@ -1,0 +1,23 @@
+#!/usr/bin/env groovy
+@Library(['piper-lib', 'piper-lib-os']) _
+try {
+	node
+	{
+            stage('Fortify_Scan') 
+	     {
+			      	     
+		checkout scm
+                executeFortifyScan script: this, fortifyCredentialsId: 'fortifyCredentialsId', gitTreeish: 'master', scanType: 'mta', environment: 'docker', dockerImage: 'docker.wdf.sap.corp:50000/piper/fortify', buildDescriptorFile: 'mta.yaml', buildDescriptorExcludeList: '/reporting/pom.xml, /selenium/pom.xml, /utils/pom.xml', fortifyProjectVersion: 'master', propagate: false
+	     }	 
+	}
+} catch (Throwable err) { // catch all exceptions
+    globalPipelineEnvironment.addError(this, err)
+    currentBuild.result = 'FAILURE'
+    throw err
+} finally {
+    node{
+        writeInflux script: this
+        //sendNotificationMail script: this
+        sendNotificationSlack(script: this, channel: "#ich4ls")
+    }
+}

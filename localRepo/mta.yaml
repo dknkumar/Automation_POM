@@ -1,0 +1,371 @@
+_schema-version: '2.0'
+
+parameters:
+  hcp-deployer-version: '1.2.0'
+   
+ID: com.sap.ich4ls.portal.ui5
+version: 0.1.7
+ 
+modules:      
+#  - name: cmoplatformrefactor
+#    type: java
+#    path: ./java/service_layer
+#    parameters:
+#      runtime-version: 3
+#      minimum-processes: 1
+#      maximum-processes: 2
+#      rolling-update: true
+#      roles:
+#        - name: cmo_onboard
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+#        - name: Create_AltIdentifier
+#          groups:
+#            - Product Admin
+##        - name: Create_AltIdentifierType
+##          groups:          
+#        - name: Create_CompanyPrefixes
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+#            - SNNR admin
+#            - SNRR admin
+#        - name: Create_CSN
+#          groups:
+#            - CSSN Admin
+#        - name: Create_CSNData
+#          groups:
+#            - CSSN Admin
+#        - name: Create_GenericMessage
+#          groups:
+#            - GENERIC_MESSAGE_ADMIN
+#            - SAP_ADMIN
+#        - name: Create_Organisation
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+##        - name: Create_OrganisationRole
+##          groups:
+#        - name: Create_OrganisationRoleToOrganisationMapping
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+#        - name: Create_PrefixToRelationshipMapping
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+#        - name: Create_Relationships
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+##        - name: Create_Role
+##          groups:
+#        - name: Create_RoleToRelationshipMapping
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+#        - name: Create_Route
+#          groups:
+#            - SAP_ADMIN
+#        - name: Create_RouteToRelationshipMapping
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+# #       - name: Create_Sem_Tpl
+# #         groups:
+#        - name: Create_SNRData
+#          groups:
+#            - SNNR admin
+#            - SNRR admin
+#        - name: Create_SNRR
+#          groups:
+#            - SNNR admin
+#            - SNRR admin
+# #       - name: Create_TPLPackagingMessage
+# #         groups:
+#        - name: Create_TradeItem
+#          groups:
+#            - Product Admin            
+#        - name: Create_User            
+#          groups:
+#            - cmo_onboard
+# #       - name: CSN_ADMIN_MAH
+# #         groups:
+##        - name: ERROR_LOG_ADMIN
+##          groups:
+##        - name: ERROR_LOG_READER
+##          groups:
+##        - name: ERROR_LOG_WRITER
+##          groups:
+##        - name: Read_All_Organisations
+##          groups:
+#        - name: Read_AltIdentifier
+#          groups:
+#            - CSSN Admin
+#            - Product Admin
+#            - SNRR admin
+##        - name: Read_AltIdentifierType
+##          groups:
+#        - name: Read_CompanyPrefixes
+#          groups:
+#            - SAP_ADMIN
+#            - SNNR admin
+#            - SNRR admin
+#        - name: Read_CSN
+#          groups:
+#            - CSSN Admin
+#            - SAP_ADMIN
+#        - name: Read_CSNData
+#          groups:
+#            - CSSN Admin
+#        - name: Read_GenericMessage
+#          groups:
+#            - GENERIC_MESSAGE_ADMIN
+#            - SAP_ADMIN
+#        - name: Read_Organisation
+#          groups:
+#            - cmo_onboard
+#            - CSSN Admin
+#            - SAP_ADMIN
+#            - SNNR admin 
+#            - SNRR admin            
+#        - name: Read_OrganisationRole
+#          groups:
+#            - CSSN Admin
+#            - GENERIC_MESSAGE_ADMIN
+#            - SAP_ADMIN
+#            - SNRR admin 
+##        - name: Read_OrganisationRoleToOrganisationMapping
+##          groups:
+#        - name: Read_PrefixToRelationshipMapping
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+#            - SNRR admin
+#        - name: Read_Relationship
+#          groups:
+#            - cmo_onboard
+#            - CSSN Admin
+#            - SAP_ADMIN
+#            - SNRR admin 
+##        - name: Read_Role
+##          groups:
+##        - name: Read_RoleToRelationshipMapping
+##          groups:
+#        - name: Read_Route
+#          groups:
+#            - CSSN Admin
+#            - SAP_ADMIN
+#            - SNRR admin
+#        - name: Read_RouteToRelationshipMapping
+#          groups:
+#            - CSSN Admin
+#            - SAP_ADMIN
+#            - SNRR admin
+##        - name: Read_Sem_Tpl
+##          groups:
+#        - name: Read_SNRData
+#          groups:
+#            - SNNR admin
+#            - SNRR admin
+#        - name: Read_SNRR
+#          groups:
+#            - SNNR admin
+#            - SNRR admin
+##        - name: Read_TPLPackagingMessage
+##          groups:           
+#        - name: Read_TradeItem
+#          groups:
+#            - CSSN Admin
+#            - Product Admin
+#            - SNNR admin
+#            - SNRR admin             
+#        - name: Read_User
+#          groups:
+#            - cmo_onboard           
+#        - name: SAP_ADMIN
+#          groups:
+#            - SAP_ADMIN            
+#        - name: Update_AltIdentifier
+#          groups:
+#            - Product Admin           
+##        - name: Update_AltIdentifierType
+##          groups:          
+#        - name: Update_CompanyPrefixes
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+#            - SNRR admin
+#        - name: Update_CSN
+#          groups:
+#            - CSSN Admin           
+#        - name: Update_CSNData
+#          groups:
+#            - CSSN Admin             
+#        - name: Update_GenericMessage
+#          groups:
+#            - GENERIC_MESSAGE_ADMIN            
+#        - name: Update_Organisation
+#          groups:
+#            - SAP_ADMIN          
+##        - name: Update_OrganisationRole
+##          groups:         
+#        - name: Update_OrganisationRoleToOrganisationMapping
+#          groups:
+#            - SAP_ADMIN        
+#        - name: Update_PrefixToRelationshipMapping
+#          groups:
+#            - SAP_ADMIN           
+#        - name: Update_Relationships
+#          groups:
+#            - SAP_ADMIN     
+##        - name: Update_Role
+##          groups:        
+#        - name: Update_RoleToRelationshipMapping
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN        
+#        - name: Update_Route
+#          groups:
+#            - SAP_ADMIN          
+#        - name: Update_RouteToRelationshipMapping
+#          groups:
+#            - cmo_onboard
+#            - SAP_ADMIN
+##        - name: Update_Sem_Tpl
+##          groups:           
+#        - name: Update_SNRData
+#          groups:
+#            - SNNR admin
+#            - SNRR admin          
+#        - name: Update_SNRR
+#          groups:
+#            - SNNR admin
+#            - SNRR admin              
+#        - name: Update_TradeItem
+#          groups:
+#            - Product Admin        
+#        - name: Update_User
+#          groups:
+#            - cmo_onboard
+#    build-parameters:
+#      builder: maven
+#      maven-opts:
+#        command: [ clean, verify]
+#      build-result: target/com.sap.ichportal*.war
+#      build-artifact-name: ROOT      
+              
+  - name: uigenericmessaging
+    description: Fiori application
+    path: ui5/generic_messaging
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uigenericmessaging
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]      
+      
+  - name: uionboarding
+    description: Fiori application
+    path: ui5/onboarding
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uionboarding
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]          
+      
+  - name: uirelationship
+    description: Fiori application
+    path: ui5/relationship
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uirelationship
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]          
+      
+  - name: uisem
+    description: Fiori application
+    path: ui5/sem
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uisem
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip      
+      maven-opts:
+        command: [ clean, verify]          
+      
+  - name: uisemtpl
+    description: Fiori application
+    path: ui5/sem_tpl
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uisemtpl
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]          
+
+  - name: uisnr
+    description: Fiori application
+    path: ui5/snr
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uisnr
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]          
+
+  - name: uitradeitems
+    description: Fiori application
+    path: ui5/tradeitems
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uitradeitems
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]          
+      
+  - name: uitm
+    description: Fiori application
+    path: ui5/transaction_monitoring
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uitm
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]          
+      
+  - name: uiobs
+    description: Fiori application
+    path: ui5/onboarding_status
+    type: com.sap.fiori.app
+    parameters:
+      html5-app-name: uiobs
+    build-parameters:
+      builder: maven
+      build-result: target/*.zip
+      maven-opts:
+        command: [ clean, verify]          
+          
+#resources:
+#  - name: db-binding
+#    type: com.sap.hcp.persistence
+#    parameters:
+#      id: hanaxs

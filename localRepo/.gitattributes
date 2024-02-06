@@ -1,0 +1,23 @@
+# Conor Gath:
+# Unsetting the text attribute on a path tells Git not to attempt any end-of-line conversion upon checkin or checkout.
+# See - https://git-scm.com/docs/gitattributes#_effects
+# unsetting causes unmodified files to appear completely modified upon pulling changes or cloning repos
+
+# Setting text=auto to allow git to decide what to do with line ending if core.autocrlf is not set
+# to set each user should run:
+# git config --global core.autocrlf true
+
+# Git guesses for anything not specified below
+* text=auto
+
+# These files are text and should be normalized (convert crlf =&gt; lf)
+*.java    text
+*.js      text
+*.xml     text
+
+# Images/Executables should be treated as binary
+# (binary is a macro for -text -diff)
+*.exe     binary
+
+# this file is read by nuget (Windows) tooling, lets keep it happy
+Moment.js.nuspec eol=crlf

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:cxf="http://cxf.component.camel.apache.org/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <n0:envelope xmlns:n0="http://www.sap.com/sap_ich4ls/"
+                     xmlns:prx="urn:sap.com:proxy:S9B:/1SAI/TAS8FB8FF2B37F00B51AA2D:740"
+                     xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+            <message date="2021-06-25" time="06:21:51">
+                <id>42010AEECDE11EECA19C5DD152B0D698</id>
+            </message>
+            <sender agency="GS1" scheme="SGLN">urn:epc:id:sgln:5000456.00000.0</sender>
+            <recipients>
+                <id agency="SAP" scheme="RegReport">RR_BHR_ICH_REP</id>
+            </recipients>
+            <content encoding="XML" format="ATTP" type="GenericReporting" version="1.0">
+                <ATTPGRDocument>
+                    <GRHeader>
+                        <GRHeaderBase>
+                            <ReceiverId>RR_BHR_ICH_REP</ReceiverId>
+                            <InstanceId>42010AEECDE11EECA19C5DD152B0D698</InstanceId>
+                            <DateTime>2022-02-03T11:17:54Z</DateTime>
+                            <VariantName>RR_BHR_REP</VariantName>
+                            <VariantVersion>1</VariantVersion>
+                        </GRHeaderBase>
+                        <ContentList>
+                            <Content type="Event">
+                                <ContentItem id="1-OBSERVE">
+                                    <ContentItemSection type="Details">
+                                        <ContentItemSectionItem>
+                                            <attribute id="sttpEvtBizlocGln"/>
+                                            <attribute id="sttpEvtBizlocGlnExt"/>
+                                            <attribute id="sttpEvtEvttime">20220203111753.0000000</attribute>
+                                            <attribute id="sttpEvtEvttzoneoffset">+01:00</attribute>
+                                            <attribute id="sttpEvtReadpntGln">040000004.000.0</attribute>
+                                            <attribute id="sttpEvtReadpntGlnExt">0</attribute>
+                                        </ContentItemSectionItem>
+                                    </ContentItemSection>
+                                    <ContentItemSection type="SourceDestination">
+                                        <ContentItemSectionItem>
+                                            <attribute id="sttpEvtSdrSdCat">1</attribute>
+                                            <attribute id="sttpEvtSdrSdGln">040000004.000.0</attribute>
+                                            <attribute id="sttpEvtSdrSdGlnExt">0</attribute>
+                                            <attribute id="sttpEvtSdrSdType">urn:epcglobal:cbv:sdt:owning_party
+                                            </attribute>
+                                        </ContentItemSectionItem>
+                                        <ContentItemSectionItem>
+                                            <attribute id="sttpEvtSdrSdCat">1</attribute>
+                                            <attribute id="sttpEvtSdrSdGln">040000004.000.0</attribute>
+                                            <attribute id="sttpEvtSdrSdGlnExt">0</attribute>
+                                            <attribute id="sttpEvtSdrSdType">urn:epcglobal:cbv:sdt:location</attribute>
+                                        </ContentItemSectionItem>
+                                        <ContentItemSectionItem>
+                                            <attribute id="sttpEvtSdrSdCat">2</attribute>
+                                            <attribute id="sttpEvtSdrSdGln">041000000.000.0</attribute>
+                                            <attribute id="sttpEvtSdrSdGlnExt">0</attribute>
+                                            <attribute id="sttpEvtSdrSdType">urn:epcglobal:cbv:sdt:owning_party
+                                            </attribute>
+                                        </ContentItemSectionItem>
+                                        <ContentItemSectionItem>
+                                            <attribute id="sttpEvtSdrSdCat">2</attribute>
+                                            <attribute id="sttpEvtSdrSdGln">041000000.000.0</attribute>
+                                            <attribute id="sttpEvtSdrSdGlnExt">0</attribute>
+                                            <attribute id="sttpEvtSdrSdType">urn:epcglobal:cbv:sdt:location</attribute>
+                                        </ContentItemSectionItem>
+                                    </ContentItemSection>
+                                    <ContentItemSection type="BusinessTransaction">
+                                        <ContentItemSectionItem>
+                                            <attribute id="sttpTrnBizttype">urn:epcglobal:cbv:btt:po</attribute>
+                                            <attribute id="sttpTrnTrncode">
+                                                urn:epcglobal:cbv:bt:0400000040004:TESTPOSAP
+                                            </attribute>
+                                        </ContentItemSectionItem>
+                                    </ContentItemSection>
+                                </ContentItem>
+                            </Content>
+                        </ContentList>
+                    </GRHeader>
+                    <GRBody>
+                        <ObjContentList>
+                            <ObjContent type="LotRefList">
+                                <ObjContentGroup>
+                                    <ObjCode id="400000401.0111.RAGRBHR2205" type="LGTIN" dateManuf="2022-02-03"
+                                             dateExp="2023-02-03"/>
+                                    <ObjCode id="400000402.0222.RAGRBHR2205" type="LGTIN" dateManuf="2022-02-03"
+                                             dateExp="2023-02-03"/>
+                                </ObjContentGroup>
+                            </ObjContent>
+                            <ObjContent type="ObjHierarchy">
+                                <ObjContentGroup type="ObjAmount">
+                                    <ObjCode id="040000004.00000180" type="SSCC" packLevel="0"/>
+                                    <ObjCode id="400000402.0222.07UB7OUN1QR" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="040000004.00000180" packLevel="1"/>
+                                    <ObjCode id="400000401.0111.1JWQB9DZ4H7" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.1V8VLWMR7F4" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.1816JIXU6SQ" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.1U6BY7PE01I" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.1ABDAB1C99W" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.16NU3OOL881" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.1S7KCZ16SJM" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.11OSOEYRTCN" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.1HS2JAWXPU3" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                    <ObjCode id="400000401.0111.1SGIHSO6OXJ" type="SGTIN" lotRef="RAGRBHR2205"
+                                             parentId="400000402.0222.07UB7OUN1QR" packLevel="2"/>
+                                </ObjContentGroup>
+                            </ObjContent>
+                        </ObjContentList>
+                    </GRBody>
+                </ATTPGRDocument>
+            </content>
+        </n0:envelope>
+    </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,52 @@
+#!/usr/bin/env groovy
+@Library('piper-lib') _
+try {
+    stage('Run Selenium tests on Docker') {
+        lock(resource: "${env.JOB_NAME}/10", inversePrecedence: true) {
+            milestone 10
+            node {
+                deleteDir()
+                checkout scm
+
+                setupPipelineEnvironment script: this, storeGithubStatistics: false
+
+                durationMeasure(script: this, measurementName: 'selenium_duration') {
+                    dockerExecute(script: this, dockerImage: 'docker.wdf.sap.corp:50000/piper/selenium', dockerWorkspace: '/home/piper') {
+                        sh 'Xvfb :99.0 -ac -screen 0 1600x1200x24 &'
+                        sh '''
+                            mvn -B -U clean verify --fail-never \
+                            -pl selenium/feature_tests -Denvironment=$ENVIRONMENT \
+                            -Dproxy.host="" -Dproxy.port="" \
+                            -Dcucumber.options="--tags '$TAGS'"
+                        '''
+                    }
+                }
+            }
+        }
+    }
+    stage('Generate Reports') {
+        lock(resource: "${env.JOB_NAME}/20", inversePrecedence: true) {
+            milestone 20
+            node {
+                durationMeasure(script: this, measurementName: 'report_duration') {
+                    cucumber '**/target/test-reports/*.json'
+                    sh 'ls -l'
+                    archiveArtifacts 'selenium/feature_tests/target/**/*'
+                    sh '''
+          tar -cvf reports.tar selenium/feature_tests/target/test-reports
+          gzip reports.tar
+          '''
+                    emailext attachmentsPattern: 'reports.tar.gz', body: 'Please find attached the test reports.', subject: 'ICH4LS - Automated test reports', to: 'DL_5BD1EEA07BCF848367000034@sap.com'
+                }
+            }
+        }
+    }
+} catch (Throwable err) { // catch all exceptions
+    globalPipelineEnvironment.addError(this, err)
+    throw err
+} finally {
+    node {
+        influxWriteData script: this
+        mailSendNotification script: this, notificationRecipients: 'conor.gath@sap.com,dhanya.basangoudar@sap.com'
+    }
+}

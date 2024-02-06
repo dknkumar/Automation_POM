@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<epcis:EPCISDocument creationDate="2016-12-09T13:45:16Z"
+	schemaVersion="1.1" xmlns:epcis="urn:epcglobal:epcis:xsd:1"
+	xmlns:gs1ushc="http://epcis.gs1us.org/hc/ns"
+	xmlns:sbdh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader">
+	<EPCISHeader>
+		<n1:StandardBusinessDocumentHeader
+			xmlns:n1="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader">
+			<n1:HeaderVersion>1.0</n1:HeaderVersion>
+			<n1:Sender>
+				<n1:Identifier Authority="GLN">0363391100002</n1:Identifier>
+			</n1:Sender>
+			<n1:Receiver>
+				<n1:Identifier Authority="GLN">1100001002641</n1:Identifier>
+			</n1:Receiver>
+			<n1:DocumentIdentification>
+				<n1:Standard>EPCglobal</n1:Standard>
+				<n1:TypeVersion>1.0</n1:TypeVersion>
+				<n1:InstanceIdentifier>005056BA6ACA1ED5B0E9C0665D4063C1
+				</n1:InstanceIdentifier>
+				<n1:Type>Events</n1:Type>
+				<n1:CreationDateAndTime>2016-01-25T10:25:53Z
+				</n1:CreationDateAndTime>
+			</n1:DocumentIdentification>
+		</n1:StandardBusinessDocumentHeader>
+	</EPCISHeader>
+	<EPCISBody>
+		<EventList>		
+			<ObjectEvent>
+				<eventTime>2016-08-11T16:44:23Z</eventTime>
+				<eventTimeZoneOffset>+01:00</eventTimeZoneOffset>
+				<epcList>
+					<epc>urn:epc:id:sgtin:030781.0572010.15100100000042</epc>
+					<epc>urn:epc:id:sgtin:030781.0572010.15100100000043</epc>
+				</epcList>
+				<action>DELETE</action>
+				<bizStep>urn:epcglobal:cbv:bizstep:decommissioning</bizStep>
+				<disposition>urn:epcglobal:cbv:disp:inactive</disposition>
+				<readPoint>
+					<id>urn:epc:id:sgln:456724.000001.0</id>
+				</readPoint>
+				<bizLocation>
+					<id>urn:epc:id:sgln:456724.000001.0</id>
+				</bizLocation>
+				<SAPExtension>
+					<objAttributes>
+						<REAS_CODE>DEFECT</REAS_CODE>
+						<DATEX>20201230</DATEX>
+					</objAttributes>
+				</SAPExtension>
+			</ObjectEvent>
+		</EventList>
+	</EPCISBody>
+</epcis:EPCISDocument>

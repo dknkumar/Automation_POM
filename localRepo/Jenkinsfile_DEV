@@ -1,0 +1,226 @@
+#!/usr/bin/env groovy
+@Library(['piper-lib', 'piper-lib-os']) _
+//import com.sap.piper.ConfigurationLoader
+import com.sap.icd.jenkins.Utils
+   
+node {
+    checkout scm 
+    deploymentHelper = load "${WORKSPACE}/piper.scripts/deploymentHelper.groovy"
+    
+    utils = new Utils()
+    gitCommitId= utils.getGitCommitId()
+
+}
+
+try {
+           
+        node {
+            stage('Setup and Validation') {
+				lock(resource: "${env.JOB_NAME}/10", inversePrecedence: true) {
+					milestone 10				
+					deleteDir()
+					checkout scm
+                
+					setupPipelineEnvironment script: this, storeGithubStatistics: true
+				}
+			}
+                        
+            stage('Code Quality') {
+                lock(resource: "${env.JOB_NAME}/20", inversePrecedence: true) {
+					milestone 20
+					node{
+						deleteDir()
+						checkout scm 
+						echo "[INFO] Start Code Quality scan."
+						measureDuration(script: this, measurementName: 'code_quality_duration') {
+							//build job: 'ich4ls_master_OD-sonar', wait: true, propagate: false
+							executeSonarScan script: this
+							
+							sh 'mvn --update-snapshots --batch-mode clean install'
+													
+							recordIssues enabledForFailure: true, tool: mavenConsole()
+							recordIssues enabledForFailure: true, tools: [java(), javaDoc()], sourceCodeEncoding: 'UTF-8'
+							recordIssues enabledForFailure: true, tool: checkStyle(pattern: '**/target/checkstyle-result.xml'), sourceCodeEncoding: 'UTF-8'
+							recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml'), sourceCodeEncoding: 'UTF-8'                    
+							recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml'), sourceCodeEncoding: 'UTF-8'
+							recordIssues enabledForFailure: true, tool: spotBugs(pattern: '**/target/spotbugsXml.xml'), sourceCodeEncoding: 'UTF-8'
+							recordIssues enabledForFailure: true, tool: taskScanner(includePattern:'**/*.java', excludePattern:'target/**/*', highTags:'FIXME', normalTags:'TODO'), sourceCodeEncoding: 'UTF-8'
+							recordIssues enabledForFailure: true, tool: findBugs(pattern: '**/target/findbugsXml.xml'), sourceCodeEncoding: 'UTF-8' 
+							
+						}
+						echo "[INFO] Code Quality scan finished."                      
+					}
+				}
+            }  
+
+            stage('Build Java') {
+				lock(resource: "${env.JOB_NAME}/30", inversePrecedence: true) {
+					milestone 30
+					deleteDir()
+					checkout scm
+
+					echo "[INFO] Start building."
+					sh "mvn clean install -pl java/service_layer -Dcom.sap.cloud.crypto.clientcert.mapping_mode=CN -Dcom.sap.cloud.crypto.clientcert.keystore_name=system"
+					stash('Java')
+					sh "mvn -V -B clean javadoc:aggregate cobertura:cobertura -Pjenkins -Dadditionalparam=-Xdoclint:none -pl java/service_layer"
+									
+					echo "[INFO] Build finished." 
+				   
+					currentBuild.result = 'SUCCESS'
+				}
+            } 
+        
+            stage('Build UI5') {
+				lock(resource: "${env.JOB_NAME}/40", inversePrecedence: true) {
+					milestone 40
+					deleteDir()
+					checkout scm
+
+					echo "[INFO] Start building."
+					setVersion script: this, buildTool: 'mta' 
+									
+					sh "java -jar /var/jenkins_home/userContent/mta.jar --build-target=NEO --mtar=com.sap.ich4ls.portal.ui5.mtar build"
+					stash('UI5')               
+					echo "[INFO] Build finished." 
+				   
+					currentBuild.result = 'SUCCESS'
+				}
+            } 
+            
+            stage('Deploy Nexus') {
+				lock(resource: "${env.JOB_NAME}/50", inversePrecedence: true) {
+					milestone 50
+					deleteDir()
+					checkout scm
+					echo "[INFO] Start deploy to Nexus."
+					sh "mvn deploy -pl java/service_layer"
+					sh "mvn deploy -pl selenium/feature_tests"
+					sh "mvn deploy -pl ui5/generic_messaging"
+					sh "mvn deploy -pl ui5/onboarding"
+					sh "mvn deploy -pl ui5/relationship"
+					sh "mvn deploy -pl ui5/sem"
+					sh "mvn deploy -pl ui5/sem_tpl"
+					sh "mvn deploy -pl ui5/snr"
+					sh "mvn deploy -pl ui5/tradeitems"
+					sh "mvn deploy -pl ui5/transaction_monitoring"
+
+					echo "[INFO] Deploy to Nexus finished." 
+				}
+            }               
+
+            stage('Deploy Java') {
+                lock(resource: "${env.JOB_NAME}/60", inversePrecedence: true) {
+					milestone 60				
+					deleteDir()
+					checkout scm
+					
+					unstash('Java')
+					
+					sh "ls java/service_layer/target/"
+					sh "mv java/service_layer/target/com*.war java/service_layer/target/ROOT.war"
+
+					neoDeploy script: this, neo: [account: 'w6cd17e00', application: 'cmoplatformrefactor', host: 'int.sap.hana.ondemand.com', runtime: 'neo-java-web', runtimeVersion: '3', size: 'lite'], deployMode: 'warParams',  source: 'java/service_layer/target/ROOT.war',  warAction: 'rolling-update', dockerImage: 'docker.wdf.sap.corp:50000/gslpdev/jenkins/neo_sdk_java_web_tomcat8:2.0-alpine'
+					   
+					echo "[INFO] SCP deploy finished."
+				  
+					currentBuild.result = 'SUCCESS'
+				}
+            }
+   
+            stage('Deploy UI5') { 
+                lock(resource: "${env.JOB_NAME}/70", inversePrecedence: true) {
+					milestone 70			
+					deleteDir()
+					checkout scm
+					
+					unstash('UI5')
+					echo "[INFO] mtar deploying."                        
+					//downloadArtifactsFromNexus script: this, artifactType: 'mta', buildTool: 'mta', fromStaging: true
+					//neoDeploy script: this, archivePath: 'com.sap.ich4ls.portal.ui5.mtar', account: 'w6cd17e00', host: 'int.sap.hana.ondemand.com', dockerImage: 'docker.wdf.sap.corp:50000/gslpdev/jenkins/neo_sdk_java_web_tomcat8:2.0-alpine'                        
+					deployHTML5mtar(this, "dev", "canary")
+					echo "[INFO] mtar finished."
+					
+					currentBuild.result = 'SUCCESS'
+				}
+            }       		
+        }       
+    }catch (Throwable err) { // catch all exceptions
+    globalPipelineEnvironment.addError(this, err)
+    currentBuild.result = 'FAILURE'
+    throw err
+} finally {
+    node{
+        influxWriteData script: this
+        mailSendNotification script: this
+        slackSendNotification(script: this, channel: "#ich4ls")
+    }
+}
+
+def deployHTML5mtar(script, environment, landscape) {
+
+    //def configuration = ConfigurationLoader.defaultStepConfiguration(script, "neoDeploy")
+
+    def deployFiles = findFiles(glob: '**/com.sap.ich4ls.portal.ui5.mtar')
+    def deployFile = deployFiles[0].path
+    def deployImportMode = "providerImport"
+    
+    def deployAccount
+    def deployHost
+    def deployNeoCredentialsId
+    
+    def dockerImage = globalPipelineEnvironment.getConfigProperty('dockerImage')
+    def dockerEnvVars = globalPipelineEnvironment.getConfigProperty('dockerEnvVars')
+    def dockerOptions = globalPipelineEnvironment.getConfigProperty('dockerOptions')
+        
+    if (environment == 'dev') {
+        deployAccount = 'w6cd17e00'
+    }
+    
+    if (landscape == 'canary') {
+        deployHost = 'int.sap.hana.ondemand.com'
+        deployNeoCredentialsId = 'CI_CREDENTIALS_ID'
+    }
+    
+    if (environment == 'qa') {
+        deployAccount = 'a629a2553'
+    }
+    
+    if (landscape == 'eu1') {
+        deployHost = 'eu1.hana.ondemand.com'
+        deployNeoCredentialsId = 'CI_CREDENTIALS_ID'
+    }
+    
+    echo "Deploying solution from file: ${deployFile} to account: ${deployAccount} on host: ${deployHost} with credentialsId: ${deployNeoCredentialsId}"
+
+    def neoExecutable = "$JENKINS_HOME/userContent/neo-1.35.8/tools/neo.sh"
+    
+    def neoDeployScript =
+                """#!/bin/bash
+                    "${neoExecutable}" deploy-mta \
+                    --host '${deployHost}' \
+                    --account '${deployAccount}' \
+                    --mode '${deployImportMode}'"""
+                    
+    withCredentials([usernamePassword(
+            credentialsId: deployNeoCredentialsId,
+            passwordVariable: 'password',
+            usernameVariable: 'username')]) {
+
+            def commonDeployParams =
+                """--user "${username}" \
+                   --password "${password}" \
+                   --source "${deployFile}" \
+                   --synchronous"""
+                   
+            
+            /*
+            dockerExecute(dockerImage: 'docker.wdf.sap.corp:50000/piper/maven'),
+                          dockerEnvVars: configuration.get('dockerEnvVars'),
+                          dockerOptions: configuration.get('dockerOptions')) {
+            */
+            sh """${neoDeployScript} \
+                      ${commonDeployParams}
+                   """
+            
+    }
+}

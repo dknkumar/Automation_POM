@@ -1,0 +1,37 @@
+general:
+  DEV_DEPLOY_HOST: int.sap.hana.ondemand.com
+  QA_DEPLOY_HOST: eu1.hana.ondemand.com
+  CI_DEPLOY_DEV_ACCOUNT: w6cd17e00
+  CI_DEPLOY_QA_ACCOUNT: a629a2553
+  CI_DEPLOY_DEV_JAVA_APPLICATION: cmoplatformrefactor
+  CI_DEPLOY_QA_JAVA_APPLICATION: cmoplatformrefactor
+  neoLandscapeDev: int.sap.hana.ondemand.com
+  neoLandscapeQA: eu1.hana.ondemand.com
+  NEO_HOME: /neo-1.35.8
+  WAR_HOME: java/service_layer/target
+  neoCredentialsId: CI_CREDENTIALS_ID
+  healthCheckUrlDev: https://cmoplatformrefactorw6cd17e00.int.sap.hana.ondemand.com/PortalOData.svc/
+  healthCheckUrlQA: https://cmoapplayerrefactora629a2553.hana.ondemand.com/PortalOData.svc/
+  gitSSHCredentials: GitHub_SSH
+  sourceClearCredentialsId: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZWFtSWQiOiI4ODQ5Iiwic2NvcGUiOltdLCJpZCI6MTkwMTUsImV4cCI6MTUyNzE3NTkzMCwiYXV0aG9yaXRpZXMiOiJBR0VOVCIsIm9yZ0lkIjoiMTIwIiwianRpIjoiYTY5N2ZlOTQtNzdkMS00NDg5LTk2MzUtZmIwNmIzYjliODZjIiwiY2xpZW50X2lkIjoiIn0.eskrfZ3deJTa1_67pYNx6JgNVbQ_Db6lwJ3rgJFwVPlB68UMHVmZVUNEZ8xE393FvGwZQz0EcDeCxHuVmRuqEcKuGIR3YWVbptE95gDv-KqaYsWotc7ZNNgM-o6IQOmRQbNTt-JzWIVRn3Hz5BoVruwU41ta8atDTfgSZqXOlu0
+steps:
+  sendNotificationMail:
+    notificationRecipients: noel.lowry@sap.com
+  executeWhitesourceScan:
+    whitesourceUserTokenCredentialsId: whitesourceUserTokenCredentialsId
+    whitesourceProductToken: f76a37a0-7421-46d5-aa22-9f275e3bda31
+  executeFortifyScan:
+    fortifyCredentialsId: fortifyCredentialsId  
+  executeCheckmarxScan:
+    checkmarxCredentialsId: be131a83-2640-4498-b544-1b8949e7df18
+    checkmarxProject: ICH4LS Portal
+    checkmarxGroupId: f8bb43bd-9a38-4e6a-a932-6a8159817e41
+  executeSonarScan:
+    projectVersion: master
+    projectKey: ICH4LS Portal
+    dockerImage: docker.wdf.sap.corp:50000/piper/sonar  
+  executeVulasScan:
+    buildDescriptorFile: java/service_layer/pom.xml
+    vulasRunNightly: false
+  writeInflux:
+    influxDBServer: jenkins    

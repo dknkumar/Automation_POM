@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cxf="http://cxf.component.camel.apache.org/">
+    <soapenv:Header />
+    <soapenv:Body>
+        <n1:envelope xmlns:n1="http://www.sap.com/sap_ich4ls/" xmlns:prx="urn:sap.com:proxy:Y21:/1SAI/TAS8FB8FF2B37F00B51AA2D:740" xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+            <message date="2022-07-14" time="07:53:37">
+                <id>42010AEECH611EDD84B2F86H77F6T7AB</id>
+            </message>
+            <sender agency="GS1" scheme="GLN">0355801000002</sender>
+            <recipients>
+                <id agency="SAP" scheme="RegReport">RR_SA_ICH_DISPATCH</id>
+            </recipients>
+            <content encoding="XML" format="ATTP" type="GenericReporting" version="1.0">
+                <ATTPGRDocument>
+                    <GRHeader>
+                        <GRHeaderBase>
+                            <ReceiverId>ReceiverId</ReceiverId>
+                            <InstanceId>InstanceId</InstanceId>
+                            <DateTime>2023-01-30T07:26:49Z</DateTime>
+                            <VariantName>RR_SA_DISPATCH</VariantName>
+                            <VariantVersion>1</VariantVersion>
+                        </GRHeaderBase>
+                        <ContentList>
+                            <Content type="BusinessPartner">
+                                <ContentItem id="92-ICH: Saudi Arabia CUST 1" selectionMethod="DestLocGLN">
+                                    <ContentItemSection type="Details">
+                                        <ContentItemSectionItem>
+                                            <attribute id="sttpBupBupGln">6285148000011</attribute>
+                                        </ContentItemSectionItem>
+                                    </ContentItemSection>
+                                </ContentItem>
+                            </Content>
+                        </ContentList>
+                    </GRHeader>
+                    <GRBody>
+                        <ObjContentList>
+                            <ObjContent type="LotRefList">
+                                <ObjContentGroup>
+                                    <ObjCode id="011122334455667510SFDAQOSAIBI1866" type="LGTIN" dateManuf="2023-01-30" dateExp="2024-01-30" />
+                                </ObjContentGroup>
+                            </ObjContent>
+                            <ObjContent type="SGTINList">
+                                <ObjContentGroup>
+                                    <ObjCode id="objcode1" type="SGTIN" lotRef="SFDAQOSAIBI1866" />
+                                    <ObjCode id="objcode2" type="SGTIN" lotRef="SFDAQOSAIBI1866" />
+                                </ObjContentGroup>
+                            </ObjContent>
+                        </ObjContentList>
+                    </GRBody>
+                </ATTPGRDocument>
+            </content>
+        </n1:envelope>
+    </soapenv:Body>
+</soapenv:Envelope>

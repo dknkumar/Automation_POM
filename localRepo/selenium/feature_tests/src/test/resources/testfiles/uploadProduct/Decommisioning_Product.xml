@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><epcis:EPCISDocument xmlns:epcis="urn:epcglobal:epcis:xsd:1" xmlns:sap="http://sap.com/xi/STTP/SAPExt" xmlns:sbdh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader" creationDate="2018-12-09T13:45:16Z" schemaVersion="1.2">
+	<EPCISHeader>
+		<sbdh:StandardBusinessDocumentHeader>
+			<sbdh:HeaderVersion>1.0</sbdh:HeaderVersion>
+			<sbdh:Sender>
+				<sbdh:Identifier Authority="GLN">0363391100002</sbdh:Identifier>
+			</sbdh:Sender>
+			<sbdh:Receiver>
+				<sbdh:Identifier Authority="GLN">1100001002641</sbdh:Identifier>
+			</sbdh:Receiver>
+			<sbdh:DocumentIdentification>
+				<sbdh:Standard>EPCglobal</sbdh:Standard>
+				<sbdh:TypeVersion>1.0</sbdh:TypeVersion>
+				<sbdh:InstanceIdentifier>automationtest565664265043</sbdh:InstanceIdentifier>
+				<sbdh:Type>Events</sbdh:Type>
+				<sbdh:CreationDateAndTime>2019-01-25T10:25:53Z</sbdh:CreationDateAndTime>
+			</sbdh:DocumentIdentification>
+		</sbdh:StandardBusinessDocumentHeader>
+	</EPCISHeader>
+	<EPCISBody>
+		<EventList>
+			<ObjectEvent>
+				<eventTime>2019-02-26T12:39:06.515506Z</eventTime>
+				<eventTimeZoneOffset>+01:00</eventTimeZoneOffset>
+				<epcList>
+					<epc>urn:epc:id:sgtin:4298300.100001.163214</epc>
+					<epc>urn:epc:id:sgtin:4298300.100001.163223</epc>
+				</epcList>
+				<action>ADD</action>
+				<bizStep>urn:epcglobal:cbv:bizstep:decommissioning</bizStep>
+				<disposition>urn:epcglobal:cbv:disp:decommissioning_auto</disposition>
+				<readPoint>
+					<id>urn:epc:id:sgln:0363391.10000.0</id>
+				</readPoint>
+				<bizLocation>
+					<id>urn:epc:id:sgln:0363391.10000.0</id>
+				</bizLocation>
+				<SAPExtension>
+					<objAttributes>
+						<LOTNO>auto7104</LOTNO>
+						<DATEX>20210715</DATEX>
+					</objAttributes>
+				</SAPExtension>
+			</ObjectEvent>
+		</EventList>
+	</EPCISBody>
+</epcis:EPCISDocument>

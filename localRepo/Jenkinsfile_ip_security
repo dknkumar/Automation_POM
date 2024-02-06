@@ -1,0 +1,32 @@
+#!/usr/bin/env groovy
+@Library(['piper-lib', 'piper-lib-os']) _
+try {
+	node{
+		stage('IPScan & OSS Vunerabilities') {
+		try{
+			lock(resource: "${env.JOB_NAME}/10", inversePrecedence: true) {
+				milestone 10
+				deleteDir()
+				checkout scm
+				setupPipelineEnvironment script: this, storeGithubStatistics: true
+				 executeOpenSourceDependencyScan script: this, scanType: 'maven', executeWhitesourceScan: true, securityVulnerabilities: false, executeVulasScan: true 
+			}
+		}catch(Throwable err)
+			{
+				globalPipelineEnvironment.addError(this, err)
+			}
+		}	
+		
+		 
+	}
+} catch (Throwable err) { // catch all exceptions
+    globalPipelineEnvironment.addError(this, err)
+    currentBuild.result = 'FAILURE'
+    throw err
+} finally {
+    node{
+        writeInflux script: this
+        //sendNotificationMail script: this
+        sendNotificationSlack(script: this, channel: "#ich4ls")
+    }
+}

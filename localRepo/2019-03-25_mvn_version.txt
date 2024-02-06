@@ -1,0 +1,57 @@
+﻿You need to check on a regular basis, if there are new versions available with: 
+
+mvn versions:display-plugin-updates versions:display-dependency-updates versions:display-property-updates
+
+
+[INFO]   maven-compiler-plugin .............................. 3.7.0 -> 3.8.0
+[INFO]   maven-javadoc-plugin ............................... 3.0.1 -> 3.1.0
+[INFO]   maven-jxr-plugin ..................................... 2.3 -> 3.0.0
+[INFO]   maven-pmd-plugin .................................... 3.8 -> 3.11.0
+[INFO]   maven-project-info-reports-plugin .................... 2.9 -> 3.0.0
+[INFO]   maven-surefire-plugin .......................... 2.20.1 -> 3.0.0-M3
+[INFO]   maven-war-plugin ..................................... 2.3 -> 3.2.2
+[INFO]   org.codehaus.mojo:sonar-maven-plugin ...... 3.4.0.905 -> 3.6.0.1398
+
+[WARNING]   maven-compiler-plugin ................... (from super-pom) 3.8.0
+[WARNING]   org.jacoco:jacoco-maven-plugin .......... (from super-pom) 0.8.1
+[INFO]   com.github.spotbugs:spotbugs-maven-plugin ........ 3.1.10 -> 3.1.11
+[INFO]   org.jacoco:jacoco-maven-plugin .............................. 0.8.3
+
+[INFO]   com.sap.cloud:neo-java-web-api ................... 3.48.12.1 -> 3.78.5
+[INFO]   com.sap.core.connectivity.httpdestination:com.sap.core.connectivity.api ... 0.9.256 -> 0.9.264
+[INFO]   com.sap.core.connectivity.httpdestination:com.sap.core.connectivity.cloud.destinations ... 0.9.256 -> 0.9.264
+[INFO]   com.sap.core.connectivity.httpdestination:com.sap.core.connectivity.cloud.destinations.tunnel ... 0.9.256 -> 0.9.264
+[INFO]   com.sap.core.connectivity.httpdestination:com.sap.core.connectivity.destinations ... 0.9.256 -> 0.9.264
+[INFO]   com.sap.core.connectivity.httpdestination:com.sap.core.connectivity.httpdestination ... 0.9.256 -> 0.9.264
+[INFO]   com.sap.core.connectivity.httpdestination:com.sap.core.connectivity.httpdestination.common ... 0.9.256 -> 0.9.264
+[INFO]   com.sap.core.connectivity.httpdestination:com.sap.core.connectivity.httpdestination.runtime ... 0.9.256 -> 0.9.264
+[INFO]   com.sap.gw.rt:camel.components.custom-development ... 1.37.1 -> 1.139.3-sap-01
+[INFO]   com.sap.it.commons:com.sap.it.commons ............... 1.40.0 -> 1.54.0
+[INFO]   com.sap.it.commons:com.sap.it.commons.logging.slf4j ...  1.40.0 -> 1.54.0
+[INFO]   com.sap.it.public:api ................................ 2.9.0 -> 2.16.0
+[INFO]   com.sap.it.public:spi ................................ 2.9.0 -> 2.16.0
+[INFO]   commons-codec:commons-codec ............................. 1.11 -> 1.12
+[INFO]   javax.servlet:javax.servlet-api ....................... 4.0.0 -> 4.0.1
+[INFO]   junit:junit ...................................... 4.12 -> 4.13-beta-2
+[INFO]   net.sf.saxon:Saxon-HE ............................. 9.8.0-4 -> 9.9.1-2
+[INFO]   org.apache.camel:camel-core ....................... 2.20.0 -> 3.0.0-M1
+[INFO]   org.apache.commons:commons-dbcp2 ...................... 2.2.0 -> 2.6.0
+[INFO]   org.apache.cxf:cxf-rt-frontend-jaxrs ................. 2.7.18 -> 3.3.1
+[INFO]   org.apache.httpcomponents:httpclient-cache ............ 4.5.4 -> 4.5.7
+[INFO]   org.apache.httpcomponents:httpcore ................... 4.4.9 -> 4.4.11
+[INFO]   org.apache.httpcomponents:httpmime .................... 4.5.4 -> 4.5.7
+[INFO]   org.apache.maven.plugin-tools:maven-plugin-annotations ...      3.5 -> 3.6.0
+[INFO]   org.apache.olingo:odata-commons-api ..... 4.4.0-sap-02 -> 4.5.0-sap-03
+[INFO]   org.apache.olingo:odata-commons-core .... 4.4.0-sap-02 -> 4.5.0-sap-03
+[INFO]   org.apache.olingo:odata-server-core ..... 4.4.0-sap-02 -> 4.5.0-sap-03
+[INFO]   org.apache.olingo:olingo-odata2-api ..... 3.0.0-sap-02 -> 3.0.0-sap-09
+[INFO]   org.apache.olingo:olingo-odata2-core .... 3.0.0-sap-02 -> 3.0.0-sap-09
+[INFO]   org.apache.poi:poi-ooxml ............................... 3.17 -> 4.0.1
+[INFO]   org.easymock:easymock ................................... 3.5 -> 4.0.2
+[INFO]   org.hamcrest:hamcrest-library ............................. 1.3 -> 2.1
+[INFO]   org.json:json ................................... 20171018 -> 20180813
+[INFO]   org.mockito:mockito-all ........................ 1.10.19 -> 2.0.2-beta
+[INFO]   org.slf4j:slf4j-api ............................. 1.7.7 -> 1.8.0-beta4
+[INFO]   org.slf4j:slf4j-log4j12 ......................... 1.7.7 -> 1.8.0-beta4
+[INFO]   org.slf4j:slf4j-nop ............................. 1.7.7 -> 1.8.0-beta4
+[INFO]   org.slf4j:slf4j-simple .......................... 1.7.7 -> 1.8.0-beta4

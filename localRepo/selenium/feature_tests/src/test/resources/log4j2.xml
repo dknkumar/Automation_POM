@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyy-MM-dd HH:mm:ss.SSS} [%t] %logger{36} - %msg%n" />
+        </Console>
+        <File name="File" fileName="target/logs/all.log" immediateFlush="false" append="false">
+            <!--<PatternLayout pattern="[%-5level] %d{yyy-MM-dd HH:mm:ss.SSS} [%t] %logger{36} - %msg%n"/>-->
+            <PatternLayout pattern="%x %p %t - %d{yyyy-MM-dd HH:mm:ss.SSS}; - %c - %m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.sap.cmoplatform" level="info" additivity="false">
+            <AppenderRef ref="File" level="info"/>
+        </Logger>
+        <Root>
+            <AppenderRef ref="File" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>

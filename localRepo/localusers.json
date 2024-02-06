@@ -1,0 +1,80 @@
+{
+  "Users": [
+    {
+      "UID": "test",
+      "Password": "{SSHA}xBlYKK0K+Vii2MnfM6sOgIk/6h8IrZ+0U/o\u003d",
+      "Roles": [
+        "Read_TradeItem",
+        "Create_Relationships",
+        "SAP_ADMIN",
+        "Create_MAH",
+        "Read_Organisation",
+        "Update_Organisation",
+        "Read_SNRR",
+        "Read_UsersInfo",
+        "Update_TPLRelationship",
+        "Create_SNRR",
+        "Update_MAH",
+        "Update_CompanyPrefixes",
+        "Create_CSN",
+        "Update_SNRData",
+        "Update_SNRR",
+        "Read_MAH",
+        "Create_User",
+        "Read_CSNData",
+        "Read_User",
+        "Read_CompanyPrefixes",
+        "Update_TradeItem",
+        "Update_CSNData",
+        "Create_TradeItem",
+        "Read_Relationship",
+        "Update_CSN",
+        "Read_CSN",
+        "Update_Relationships",
+        "Create_CSNData",
+        "cmo_onboard",
+        "Read_TPLRelationship",
+        "Create_CompanyPrefixes",
+        "Create_SNRData",
+        "Create_TPLRelationship",
+        "Update_User",
+        "Create_Organisation",
+        "Read_SNRData"
+      ],
+      "Attributes": [
+        {
+          "attributeName": "firstname",
+          "attributeValue": "Test"
+        },
+        {
+          "attributeName": "lastname",
+          "attributeValue": "User"
+        },
+        {
+          "attributeName": "PNid",
+          "attributeValue": "PNCONTRACTMAN20160811"
+        },
+        {
+          "attributeName": "mail",
+          "attributeValue": "test.user@sap.com"
+        },
+        {
+          "attributeName": "IsCmo",
+          "attributeValue": "true"
+        },
+        {
+          "attributeName": "IsMah",
+          "attributeValue": "false"
+        },
+        {
+          "attributeName": "Org_type",
+          "attributeValue": "cmo"
+        },
+        {
+          "attributeName": "invitingMahPnId",
+          "attributeValue": "PNCONTRACTMAN20160811"
+        }
+      ]
+    }
+  ]
+}
